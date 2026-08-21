@@ -1,0 +1,34 @@
+.mark {
+  flex-shrink: 0;
+  display: block;
+}
+
+.lockup {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  direction: ltr;
+}
+
+.lockup__word {
+  font-family: var(--font-mono);
+  font-weight: 700;
+  font-size: 1.125rem;
+  letter-spacing: -0.01em;
+}
+
+.lockup--light .lockup__word {
+  color: var(--ink);
+}
+
+.lockup--dark .lockup__word {
+  color: var(--paper);
+}
+
+.lockup--light .lockup__accent {
+  color: var(--teal);
+}
+
+.lockup--dark .lockup__accent {
+  color: var(--light-teal);
+}

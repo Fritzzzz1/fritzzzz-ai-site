@@ -1,0 +1,18 @@
+.footer {
+  background: var(--paper);
+  border-top: 1px solid var(--line);
+  padding-block: 32px;
+}
+
+.footer__inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+
+.footer__contact {
+  color: var(--muted);
+  font-size: 0.875rem;
+}

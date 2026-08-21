@@ -1,0 +1,253 @@
+.lens {
+  position: relative;
+  width: min(520px, 40vw);
+  max-width: 100%;
+  margin-inline: auto;
+}
+
+.lens__stage {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 1 / 1;
+}
+
+.lens__svg {
+  width: 100%;
+  height: auto;
+  overflow: visible;
+  display: block;
+}
+
+.lens__ring {
+  fill: none;
+  stroke: var(--light-teal);
+  stroke-width: 11;
+  stroke-dasharray: 1.006;
+  stroke-dashoffset: 1;
+  animation: lens-draw 0.8s cubic-bezier(0.22, 0.7, 0.2, 1) 0s forwards;
+}
+
+.lens__spoke {
+  stroke: var(--light-teal);
+  stroke-width: 8;
+  stroke-dasharray: 1;
+  stroke-dashoffset: 1;
+  opacity: 0;
+  animation: lens-draw-spoke 0.2s ease-out forwards;
+}
+
+.lens__spoke--1 {
+  animation-delay: 1.05s;
+}
+
+.lens__spoke--2 {
+  animation-delay: 1.3s;
+}
+
+.lens__spoke--3 {
+  animation-delay: 1.55s;
+}
+
+.lens__center {
+  fill: var(--light-teal);
+  stroke: var(--teal);
+  stroke-width: 3;
+  opacity: 0;
+  transform-box: fill-box;
+  transform-origin: center;
+  animation:
+    lens-fade-in 0.3s ease-out 0.75s forwards,
+    lens-breathe 4.2s ease-in-out 2.4s infinite;
+}
+
+.lens__node {
+  fill: var(--ink);
+  stroke: var(--light-teal);
+  stroke-width: 8;
+  opacity: 0;
+  transform-box: fill-box;
+  transform-origin: center;
+  transform: scale(0.4);
+  animation: lens-pop 0.18s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+}
+
+.lens__node--1 {
+  animation-delay: 1.2s;
+}
+
+.lens__node--2 {
+  animation-delay: 1.45s;
+}
+
+.lens__node--3 {
+  animation-delay: 1.7s;
+}
+
+.lens__handle {
+  stroke: var(--light-teal);
+  stroke-width: 11;
+  opacity: 0;
+  animation: lens-fade-in 0.3s ease-out 0.55s forwards;
+}
+
+.lens__hit {
+  position: absolute;
+  width: 12%;
+  aspect-ratio: 1 / 1;
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.lens__hit--1 {
+  left: 25.263%;
+  top: 25.263%;
+}
+
+.lens__hit--2 {
+  left: 74.737%;
+  top: 25.263%;
+}
+
+.lens__hit--3 {
+  left: 50%;
+  top: 84.737%;
+}
+
+.lens__label {
+  position: absolute;
+  font-family: var(--font-heebo);
+  font-weight: 500;
+  font-size: 1rem;
+  white-space: nowrap;
+  color: var(--paper);
+  opacity: 0;
+  animation: lens-label-in 0.25s ease-out forwards;
+  transition:
+    color 0.2s ease,
+    opacity 0.2s ease;
+}
+
+.lens__label--1 {
+  left: 25.263%;
+  top: 25.263%;
+  transform: translate(-50%, calc(-100% - 26px));
+  animation-delay: 1.3s;
+}
+
+.lens__label--2 {
+  left: 74.737%;
+  top: 25.263%;
+  transform: translate(-50%, calc(-100% - 26px));
+  animation-delay: 1.55s;
+}
+
+.lens__label--3 {
+  left: 50%;
+  top: 84.737%;
+  transform: translate(-50%, 26px);
+  animation-delay: 1.8s;
+}
+
+.lens__hit--1:hover ~ .lens__label--1,
+.lens__hit--2:hover ~ .lens__label--2,
+.lens__hit--3:hover ~ .lens__label--3 {
+  opacity: 1 !important;
+}
+
+.lens__caption {
+  margin-top: 20px;
+  text-align: center;
+  font-size: 0.9375rem;
+  color: var(--muted-on-dark);
+  opacity: 0;
+  animation: lens-fade-in 0.35s ease-out 2.05s forwards;
+}
+
+@keyframes lens-draw {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+@keyframes lens-draw-spoke {
+  from {
+    stroke-dashoffset: 1;
+    opacity: 1;
+  }
+  to {
+    stroke-dashoffset: 0;
+    opacity: 1;
+  }
+}
+
+@keyframes lens-fade-in {
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes lens-pop {
+  from {
+    opacity: 0;
+    transform: scale(0.4);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes lens-label-in {
+  to {
+    opacity: 0.75;
+  }
+}
+
+@keyframes lens-breathe {
+  0%,
+  100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.08);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .lens__ring,
+  .lens__spoke,
+  .lens__center,
+  .lens__node,
+  .lens__label,
+  .lens__handle,
+  .lens__caption {
+    animation: none !important;
+    opacity: 1;
+    transform-origin: center;
+  }
+
+  .lens__ring,
+  .lens__spoke {
+    stroke-dashoffset: 0;
+  }
+
+  .lens__node {
+    transform: scale(1);
+  }
+
+  .lens__label--1 {
+    transform: translate(-50%, calc(-100% - 26px));
+  }
+
+  .lens__label--2 {
+    transform: translate(-50%, calc(-100% - 26px));
+  }
+
+  .lens__label--3 {
+    transform: translate(-50%, -50%);
+  }
+
+  .lens__label {
+    opacity: 0.75;
+  }
+}

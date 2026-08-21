@@ -1,0 +1,22 @@
+import './Cta.css'
+
+export function Cta() {
+  return (
+    <section className="cta">
+      <div className="container cta__inner">
+        <h2 className="cta__title">השלב הראשון: שיחת היכרות — בלי התחייבות.</h2>
+        <p className="cta__sub">
+          מביאים בעיה אמיתית מהעבודה, ובודקים יחד מהו הצעד הקטן והשימושי ביותר.
+        </p>
+        <div className="cta__actions">
+          <a href="https://wa.me/972543517191" className="btn btn--primary">
+            לכתוב לי בוואטסאפ
+          </a>
+          <a href="mailto:friedmanliran@gmail.com" className="btn btn--outline-on-dark">
+            friedmanliran@gmail.com
+          </a>
+        </div>
+      </div>
+    </section>
+  )
+}
