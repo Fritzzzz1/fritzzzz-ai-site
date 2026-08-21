@@ -6,7 +6,7 @@ export function Cta() {
       <div className="container cta__inner">
         <h2 className="cta__title">השלב הראשון: שיחת היכרות — בלי התחייבות.</h2>
         <p className="cta__sub">
-          מביאים בעיה אמיתית מהעבודה, ובודקים יחד מהו הצעד הקטן והשימושי ביותר.
+          שיחה ראשונה על העסק ועל מה שמפריע בעבודה היום-יומית. כבר ממנה תצאו עם טיפים ראשונים ואפשרויות להמשך.
         </p>
         <div className="cta__actions">
           <a href="https://wa.me/972543517191" className="btn btn--primary">

@@ -8,7 +8,7 @@ export function Lens() {
         className="lens__svg"
         viewBox="-40 -40 380 380"
         role="img"
-        aria-label="דיאגרמת האבחון: מרכז המחובר לשלושה צמתים — ללמד, לבנות לשימוש, מערכת שלמה"
+        aria-label="דיאגרמת האבחון: מרכז המחובר לשלושה צמתים — הדרכה אישית, אוטומציה קטנה, סוכנים ותוכנות"
       >
         <circle className="lens__ring" cx="150" cy="150" r="108" pathLength={1} />
         <line className="lens__spoke lens__spoke--1" x1="150" y1="150" x2="56" y2="56" pathLength={1} />
@@ -28,12 +28,11 @@ export function Lens() {
       <span className="lens__hit lens__hit--2" aria-hidden="true" />
       <span className="lens__hit lens__hit--3" aria-hidden="true" />
 
-      <span className="lens__label lens__label--1">ללמד</span>
-      <span className="lens__label lens__label--2">לבנות לשימוש</span>
-      <span className="lens__label lens__label--3">מערכת שלמה</span>
+      <span className="lens__label lens__label--1">הדרכה אישית</span>
+      <span className="lens__label lens__label--2">אוטומציה קטנה</span>
+      <span className="lens__label lens__label--3">סוכנים ותוכנות</span>
       </div>
 
-      <p className="lens__caption">ולפעמים המסקנה: לא צריך לבנות כלום.</p>
     </div>
   )
 }

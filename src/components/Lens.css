@@ -154,14 +154,6 @@
   opacity: 1 !important;
 }
 
-.lens__caption {
-  margin-top: 20px;
-  text-align: center;
-  font-size: 0.9375rem;
-  color: var(--muted-on-dark);
-  opacity: 0;
-  animation: lens-fade-in 0.35s ease-out 2.05s forwards;
-}
 
 @keyframes lens-draw {
   to {
@@ -219,8 +211,7 @@
   .lens__center,
   .lens__node,
   .lens__label,
-  .lens__handle,
-  .lens__caption {
+  .lens__handle {
     animation: none !important;
     opacity: 1;
     transform-origin: center;

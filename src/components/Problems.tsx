@@ -40,11 +40,9 @@ export function Problems() {
   return (
     <section id="problems" className="problems">
       <div className="container">
-        <p className="eyebrow">נקודת ההתחלה</p>
+        <p className="eyebrow">השירותים</p>
         <h2 className="problems__title">
-          בעיות אמיתיות,
-          <br />
-          לא רשימת כלים.
+          דברים שאני פותר.
         </h2>
         <div ref={ref} className="problems__grid">
           {PROBLEMS.map((problem, index) => (
