@@ -28,15 +28,6 @@ export function Mark({ tone, size = 32 }: MarkProps) {
       <circle cx="56" cy="56" r="17" fill={nodeFill} stroke={nodeStroke} strokeWidth="8" />
       <circle cx="244" cy="56" r="17" fill={nodeFill} stroke={nodeStroke} strokeWidth="8" />
       <circle cx="150" cy="282" r="17" fill={nodeFill} stroke={nodeStroke} strokeWidth="8" />
-      <line
-        x1="230"
-        y1="230"
-        x2="275"
-        y2="275"
-        stroke={ringStroke}
-        strokeWidth="11"
-        strokeLinecap="round"
-      />
     </svg>
   )
 }
