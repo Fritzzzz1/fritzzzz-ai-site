@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import './Lens.css'
 
 const PATHS = [
@@ -9,6 +9,48 @@ const PATHS = [
 
 const INTRO_MS = 2200
 const CYCLE_MS = 2800
+const TURN_MS = 120000
+const CENTER = 150
+const BOX_MIN = -40
+const BOX_SIZE = 380
+const LABEL_GAP = 30
+
+function useDrift(stage: React.RefObject<HTMLDivElement | null>, labels: React.RefObject<(HTMLSpanElement | null)[]>) {
+  useEffect(() => {
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      place(0)
+      return
+    }
+    let frame = 0
+    const started = performance.now()
+    const tick = (now: number) => {
+      place(((now - started) / TURN_MS) * 2 * Math.PI)
+      frame = requestAnimationFrame(tick)
+    }
+    frame = requestAnimationFrame(tick)
+    return () => cancelAnimationFrame(frame)
+
+    function place(angle: number) {
+      if (stage.current) stage.current.style.rotate = `${(angle * 180) / Math.PI}deg`
+      const cos = Math.cos(angle)
+      const sin = Math.sin(angle)
+      PATHS.forEach((p, i) => {
+        const el = labels.current?.[i]
+        if (!el) return
+        const dx = p.x - CENTER
+        const dy = p.y - CENTER
+        const len = Math.hypot(dx, dy)
+        const ux = (dx * cos - dy * sin) / len
+        const uy = (dx * sin + dy * cos) / len
+        const ax = CENTER + ux * (len + LABEL_GAP)
+        const ay = CENTER + uy * (len + LABEL_GAP)
+        el.style.left = `${((ax - BOX_MIN) / BOX_SIZE) * 100}%`
+        el.style.top = `${((ay - BOX_MIN) / BOX_SIZE) * 100}%`
+        el.style.transform = `translate(${-50 + 50 * ux}%, ${-50 + 50 * uy}%)`
+      })
+    }
+  }, [stage, labels])
+}
 
 function usePathCycle(paused: boolean) {
   const [active, setActive] = useState(-1)
@@ -32,10 +74,13 @@ export function Lens() {
   const [hovered, setHovered] = useState(-1)
   const [cycled, setCycled] = usePathCycle(hovered !== -1)
   const active = hovered !== -1 ? hovered : cycled
+  const stage = useRef<HTMLDivElement>(null)
+  const labels = useRef<(HTMLSpanElement | null)[]>([])
+  useDrift(stage, labels)
 
   return (
     <div className="lens">
-      <div className="lens__stage">
+      <div className="lens__stage" ref={stage}>
         <svg
           className="lens__svg"
           viewBox="-40 -40 380 380"
@@ -66,6 +111,9 @@ export function Lens() {
           ))}
         </svg>
 
+      </div>
+
+      <div className="lens__labels">
         {PATHS.map((p, i) => (
           <span
             key={p.label}
@@ -80,7 +128,13 @@ export function Lens() {
         ))}
 
         {PATHS.map((p, i) => (
-          <span key={p.label} className={`lens__label lens__label--${i + 1}${active === i ? ' is-active' : ''}`}>
+          <span
+            key={p.label}
+            ref={(el) => {
+              labels.current[i] = el
+            }}
+            className={`lens__label lens__label--${i + 1}${active === i ? ' is-active' : ''}`}
+          >
             {p.label}
           </span>
         ))}

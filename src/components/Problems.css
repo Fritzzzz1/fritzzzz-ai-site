@@ -22,36 +22,64 @@
 }
 
 .problems__card {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
   background: var(--white);
   padding: 28px 32px;
-  border-top: 1px solid transparent;
   display: flex;
   flex-direction: column;
   gap: 12px;
   transition:
     opacity 0.6s ease,
-    transform 0.6s ease,
-    box-shadow 0.2s ease,
-    border-color 0.2s ease;
+    transform 0.6s ease;
 }
 
-.problems__card:hover {
-  box-shadow: var(--shadow-hover);
-  border-top-color: var(--teal);
-  position: relative;
-  z-index: 1;
+.problems__card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: var(--soft-teal);
+  transform: scaleX(0);
+  transform-origin: 100% 50%;
+  transition: transform 0.45s cubic-bezier(0.22, 0.7, 0.2, 1);
+}
+
+.problems__card:hover::before,
+.problems__card:focus-within::before {
+  transform: scaleX(1);
 }
 
 .problems__number {
   font-family: var(--font-mono);
   font-weight: 700;
   font-size: 0.875rem;
-  color: var(--teal);
+  color: var(--light-teal);
+  transition: color 0.3s ease;
 }
 
 .problems__card-title {
   font-size: 1.1875rem;
   font-weight: 500;
+  align-self: flex-start;
+  padding-bottom: 4px;
+  background-image: linear-gradient(var(--teal), var(--teal));
+  background-repeat: no-repeat;
+  background-size: 0% 2px;
+  background-position: 100% 100%;
+  transition:
+    color 0.3s ease,
+    background-size 0.45s cubic-bezier(0.22, 0.7, 0.2, 1) 0.08s;
+}
+
+.problems__card:hover .problems__number {
+  color: var(--teal);
+}
+
+.problems__card:hover .problems__card-title {
+  color: var(--teal);
+  background-size: 100% 2px;
 }
 
 .problems__card-body {

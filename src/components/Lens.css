@@ -9,7 +9,6 @@
   position: relative;
   width: 100%;
   aspect-ratio: 1 / 1;
-  animation: lens-spin 120s linear infinite;
 }
 
 .lens__svg {
@@ -86,6 +85,7 @@
 
 .lens__hit {
   position: absolute;
+  z-index: 3;
   width: 12%;
   aspect-ratio: 1 / 1;
   border-radius: 50%;
@@ -107,6 +107,12 @@
   top: 84.737%;
 }
 
+.lens__labels {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+}
+
 .lens__label {
   position: absolute;
   font-family: var(--font-heebo);
@@ -115,30 +121,19 @@
   white-space: nowrap;
   color: var(--paper);
   opacity: 0;
-  animation:
-    lens-label-in 0.25s ease-out forwards,
-    lens-unspin 120s linear infinite;
+  animation: lens-label-in 0.25s ease-out forwards;
   transition: opacity 0.45s ease;
 }
 
 .lens__label--1 {
-  left: 14.3%;
-  top: 14.3%;
-  transform: translate(-50%, -50%);
   animation-delay: 1.3s;
 }
 
 .lens__label--2 {
-  left: 85.7%;
-  top: 14.3%;
-  transform: translate(-50%, -50%);
   animation-delay: 1.55s;
 }
 
 .lens__label--3 {
-  left: 50%;
-  top: 100.5%;
-  transform: translate(-50%, -50%);
   animation-delay: 1.8s;
 }
 
@@ -204,18 +199,6 @@
   }
 }
 
-@keyframes lens-spin {
-  to {
-    rotate: 360deg;
-  }
-}
-
-@keyframes lens-unspin {
-  to {
-    rotate: -360deg;
-  }
-}
-
 @keyframes lens-breathe {
   0%,
   100% {
@@ -227,10 +210,6 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .lens__stage {
-    animation: none;
-  }
-
   .lens__ring,
   .lens__spoke,
   .lens__center,
