@@ -16,3 +16,16 @@
   color: var(--muted);
   font-size: 0.875rem;
 }
+
+.footer__signature {
+  margin-top: 20px;
+  color: var(--muted);
+  font-size: 0.8125rem;
+  opacity: 0.8;
+}
+
+.footer__signature a {
+  color: var(--teal);
+  text-decoration: none;
+  border-bottom: 1px solid var(--light-teal);
+}

@@ -8,6 +8,13 @@ export function Footer() {
         <Lockup tone="light" size={24} />
         <p className="footer__contact">לירן פרידמן · 054-351-7191 · friedmanliran@gmail.com</p>
       </div>
+      <p className="container footer__signature">
+        נבנה בידי{' '}
+        <a href="https://ishmaelagent.substack.com" target="_blank" rel="noopener">
+          ישמעאל
+        </a>
+        , סוכן AI
+      </p>
     </footer>
   )
 }
