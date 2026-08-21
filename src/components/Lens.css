@@ -9,6 +9,7 @@
   position: relative;
   width: 100%;
   aspect-ratio: 1 / 1;
+  animation: lens-spin 120s linear infinite;
 }
 
 .lens__svg {
@@ -83,13 +84,6 @@
   animation-delay: 1.7s;
 }
 
-.lens__handle {
-  stroke: var(--light-teal);
-  stroke-width: 11;
-  opacity: 0;
-  animation: lens-fade-in 0.3s ease-out 0.55s forwards;
-}
-
 .lens__hit {
   position: absolute;
   width: 12%;
@@ -121,36 +115,51 @@
   white-space: nowrap;
   color: var(--paper);
   opacity: 0;
-  animation: lens-label-in 0.25s ease-out forwards;
-  transition:
-    color 0.2s ease,
-    opacity 0.2s ease;
+  animation:
+    lens-label-in 0.25s ease-out forwards,
+    lens-unspin 120s linear infinite;
+  transition: opacity 0.45s ease;
 }
 
 .lens__label--1 {
-  left: 25.263%;
-  top: 25.263%;
-  transform: translate(-50%, calc(-100% - 26px));
+  left: 14.3%;
+  top: 14.3%;
+  transform: translate(-50%, -50%);
   animation-delay: 1.3s;
 }
 
 .lens__label--2 {
-  left: 74.737%;
-  top: 25.263%;
-  transform: translate(-50%, calc(-100% - 26px));
+  left: 85.7%;
+  top: 14.3%;
+  transform: translate(-50%, -50%);
   animation-delay: 1.55s;
 }
 
 .lens__label--3 {
   left: 50%;
-  top: 84.737%;
-  transform: translate(-50%, 26px);
+  top: 100.5%;
+  transform: translate(-50%, -50%);
   animation-delay: 1.8s;
 }
 
-.lens__hit--1:hover ~ .lens__label--1,
-.lens__hit--2:hover ~ .lens__label--2,
-.lens__hit--3:hover ~ .lens__label--3 {
+.lens__spoke,
+.lens__node {
+  transition:
+    stroke 0.45s ease,
+    fill 0.45s ease,
+    stroke-width 0.45s ease;
+}
+
+.lens__spoke.is-active {
+  stroke: var(--paper);
+}
+
+.lens__node.is-active {
+  fill: var(--light-teal);
+  stroke: var(--paper);
+}
+
+.lens__label.is-active {
   opacity: 1 !important;
 }
 
@@ -195,6 +204,18 @@
   }
 }
 
+@keyframes lens-spin {
+  to {
+    rotate: 360deg;
+  }
+}
+
+@keyframes lens-unspin {
+  to {
+    rotate: -360deg;
+  }
+}
+
 @keyframes lens-breathe {
   0%,
   100% {
@@ -206,36 +227,22 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
+  .lens__stage {
+    animation: none;
+  }
+
   .lens__ring,
   .lens__spoke,
   .lens__center,
   .lens__node,
   .lens__label,
-  .lens__handle {
-    animation: none !important;
-    opacity: 1;
-    transform-origin: center;
-  }
-
-  .lens__ring,
+    .lens__ring,
   .lens__spoke {
     stroke-dashoffset: 0;
   }
 
   .lens__node {
     transform: scale(1);
-  }
-
-  .lens__label--1 {
-    transform: translate(-50%, calc(-100% - 26px));
-  }
-
-  .lens__label--2 {
-    transform: translate(-50%, calc(-100% - 26px));
-  }
-
-  .lens__label--3 {
-    transform: translate(-50%, -50%);
   }
 
   .lens__label {
