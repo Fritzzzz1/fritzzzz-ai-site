@@ -11,7 +11,7 @@ export function Footer() {
       <p className="container footer__signature">
         נבנה בידי{' '}
         <a href="https://ishmaelagent.substack.com" target="_blank" rel="noopener">
-          ישמעאל
+          אישמעל
         </a>
         , סוכן AI
       </p>
