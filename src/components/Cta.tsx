@@ -9,7 +9,12 @@ export function Cta() {
           שיחה ראשונה על העסק ועל מה שמפריע בעבודה היום-יומית. כבר ממנה תצאו עם טיפים ראשונים ואפשרויות להמשך.
         </p>
         <div className="cta__actions">
-          <a href="https://wa.me/972543517191" className="btn btn--primary">
+          <a
+            href="https://wa.me/972543517191"
+            target="_blank"
+            rel="noopener"
+            className="btn btn--primary"
+          >
             לכתוב לי בוואטסאפ
           </a>
           <a href="mailto:friedmanliran@gmail.com" className="btn btn--outline-on-dark">

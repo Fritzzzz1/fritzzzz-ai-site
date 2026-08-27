@@ -17,8 +17,24 @@
   font-size: 0.875rem;
 }
 
+.footer__link {
+  border-bottom: 1px solid var(--line);
+  transition:
+    color 0.2s ease,
+    border-color 0.2s ease;
+}
+
+.footer__link:hover {
+  color: var(--teal);
+  border-color: var(--light-teal);
+}
+
 .footer__signature {
   margin-top: 20px;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 0 6px;
   color: var(--muted);
   font-size: 0.8125rem;
   opacity: 0.8;

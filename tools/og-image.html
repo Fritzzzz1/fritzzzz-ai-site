@@ -1,0 +1,112 @@
+<!doctype html>
+<html lang="he" dir="rtl">
+  <head>
+    <meta charset="UTF-8" />
+    <title>og.png source</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Heebo:wght@300;400;500;700;800&family=JetBrains+Mono:wght@700&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --ink: #16262e;
+        --paper: #f4f5f6;
+        --light-teal: #58a49e;
+        --font-heebo: 'Heebo', system-ui, sans-serif;
+        --font-mono: 'JetBrains Mono', ui-monospace, monospace;
+      }
+
+      * {
+        box-sizing: border-box;
+        margin: 0;
+      }
+
+      body {
+        background: var(--paper);
+        font-family: var(--font-heebo);
+      }
+
+      .og {
+        width: 1200px;
+        height: 630px;
+        background: var(--ink);
+        padding: 72px 80px;
+        display: flex;
+        flex-direction: column;
+      }
+
+      .og__lockup {
+        display: inline-flex;
+        align-items: center;
+        gap: 16px;
+        direction: ltr;
+        align-self: flex-start;
+      }
+
+      .og__wordmark {
+        font-family: var(--font-mono);
+        font-weight: 700;
+        font-size: 34px;
+        letter-spacing: -0.01em;
+        color: var(--paper);
+      }
+
+      .og__wordmark span {
+        color: var(--light-teal);
+      }
+
+      .og__copy {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        gap: 22px;
+      }
+
+      .og__eyebrow {
+        font-weight: 500;
+        font-size: 28px;
+        letter-spacing: 0.02em;
+        color: var(--light-teal);
+      }
+
+      .og__title {
+        font-weight: 800;
+        font-size: 62px;
+        line-height: 1.16;
+        color: var(--paper);
+      }
+
+      .og__title-accent {
+        color: var(--light-teal);
+      }
+    </style>
+  </head>
+  <body>
+    <div class="og">
+      <span class="og__lockup">
+        <svg width="52" height="52" viewBox="0 0 300 300" aria-hidden="true">
+          <circle cx="150" cy="150" r="108" fill="none" stroke="#F4F5F6" stroke-width="11" />
+          <line x1="150" y1="150" x2="56" y2="56" stroke="#58A49E" stroke-width="8" />
+          <line x1="150" y1="150" x2="244" y2="56" stroke="#58A49E" stroke-width="8" />
+          <line x1="150" y1="150" x2="150" y2="282" stroke="#58A49E" stroke-width="8" />
+          <circle cx="150" cy="150" r="24" fill="#58A49E" />
+          <circle cx="56" cy="56" r="17" fill="#16262E" stroke="#58A49E" stroke-width="8" />
+          <circle cx="244" cy="56" r="17" fill="#16262E" stroke="#58A49E" stroke-width="8" />
+          <circle cx="150" cy="282" r="17" fill="#16262E" stroke="#58A49E" stroke-width="8" />
+        </svg>
+        <span class="og__wordmark">fritzzzz<span>_ai</span></span>
+      </span>
+
+      <div class="og__copy">
+        <p class="og__eyebrow">ייעוץ, הדרכה ובנייה עם AI — לעצמאים ולעסקים</p>
+        <h1 class="og__title">
+          אני עוזר לעסקים לעבוד חכם יותר<br />
+          <span class="og__title-accent">ולפתור בעיות באמצעות AI.</span>
+        </h1>
+      </div>
+    </div>
+  </body>
+</html>

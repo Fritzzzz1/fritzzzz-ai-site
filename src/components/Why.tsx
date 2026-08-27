@@ -21,7 +21,16 @@ export function Why() {
             />
           </div>
           <p className="why__caption-name">לירן פרידמן</p>
-          <p className="why__caption-handle">fritzzzz_ai</p>
+          <p className="why__caption-handle">
+            <a
+              href="https://www.instagram.com/fritzzzz_ai/"
+              target="_blank"
+              rel="noopener"
+              aria-label="fritzzzz_ai באינסטגרם"
+            >
+              fritzzzz_ai
+            </a>
+          </p>
         </div>
 
         <div className="why__copy">

@@ -51,6 +51,14 @@
   text-align: right;
 }
 
+.why__caption-handle a {
+  transition: color 0.2s ease;
+}
+
+.why__caption-handle a:hover {
+  color: var(--teal);
+}
+
 .why__title {
   font-size: clamp(2rem, 4.5vw, 3.2rem);
   line-height: 1.15;

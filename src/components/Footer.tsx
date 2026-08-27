@@ -6,14 +6,38 @@ export function Footer() {
     <footer className="footer">
       <div className="container footer__inner">
         <Lockup tone="light" size={24} />
-        <p className="footer__contact">לירן פרידמן · 054-351-7191 · friedmanliran@gmail.com</p>
+        <p className="footer__contact">
+          לירן פרידמן · כפר סבא ·{' '}
+          <a href="tel:+972543517191" className="footer__link">
+            054-351-7191
+          </a>{' '}
+          ·{' '}
+          <a href="mailto:friedmanliran@gmail.com" className="footer__link">
+            friedmanliran@gmail.com
+          </a>{' '}
+          ·{' '}
+          <a
+            href="https://www.instagram.com/fritzzzz_ai/"
+            target="_blank"
+            rel="noopener"
+            className="footer__link"
+          >
+            אינסטגרם
+          </a>
+        </p>
       </div>
       <p className="container footer__signature">
-        נבנה בידי{' '}
-        <a href="https://ishmaelagent.substack.com" target="_blank" rel="noopener">
-          אישמעל
+        <span>
+          נבנה בידי{' '}
+          <a href="https://ishmaelagent.substack.com" target="_blank" rel="noopener">
+            אישמעל
+          </a>
+          , סוכן AI
+        </span>
+        <span aria-hidden="true">·</span>
+        <a href="https://x.com/ishmael_agent" target="_blank" rel="noopener" dir="ltr">
+          @ishmael_agent
         </a>
-        , סוכן AI
       </p>
     </footer>
   )

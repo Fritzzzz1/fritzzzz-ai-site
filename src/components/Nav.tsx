@@ -31,7 +31,12 @@ export function Nav() {
             </a>
           ))}
         </nav>
-        <a href="https://wa.me/972543517191" className="btn btn--primary nav__cta">
+        <a
+          href="https://wa.me/972543517191"
+          target="_blank"
+          rel="noopener"
+          className="btn btn--primary nav__cta"
+        >
           שיחת היכרות
         </a>
       </div>
