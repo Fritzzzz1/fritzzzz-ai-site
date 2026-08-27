@@ -13,10 +13,14 @@ export function Why() {
         <div className="why__photo-block">
           <div className="why__photo-frame">
             <img
-              src={`${import.meta.env.BASE_URL}headshot.png`}
+              src={`${import.meta.env.BASE_URL}portrait-800.webp`}
+              srcSet={`${import.meta.env.BASE_URL}portrait-800.webp 800w, ${import.meta.env.BASE_URL}portrait-1600.webp 1600w`}
+              sizes="(max-width: 800px) 220px, 320px"
               alt="לירן פרידמן"
-              width={368}
-              height={369}
+              width={800}
+              height={800}
+              loading="lazy"
+              decoding="async"
               className="why__photo"
             />
           </div>
