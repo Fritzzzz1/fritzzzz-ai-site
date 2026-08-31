@@ -1,4 +1,3 @@
-import { Lens } from './Lens'
 import './Hero.css'
 
 export function Hero() {
@@ -17,7 +16,7 @@ export function Hero() {
           </p>
           <div className="hero__actions">
             <a
-              href="https://wa.me/972543517191"
+              href={`https://wa.me/972543517191?text=${encodeURIComponent('היי לירן, הגעתי מהאתר ואשמח לשיחת היכרות 🙂')}`}
               target="_blank"
               rel="noopener"
               className="btn btn--primary"
@@ -30,7 +29,32 @@ export function Hero() {
           </div>
         </div>
         <div className="hero__visual">
-          <Lens />
+          <div className="hero__photo-block">
+            <div className="hero__photo-frame">
+              <img
+                src={`${import.meta.env.BASE_URL}portrait-800.webp`}
+                srcSet={`${import.meta.env.BASE_URL}portrait-800.webp 800w, ${import.meta.env.BASE_URL}portrait-1600.webp 1600w`}
+                sizes="(max-width: 900px) 240px, 400px"
+                alt="לירן פרידמן"
+                width={800}
+                height={800}
+                fetchPriority="high"
+                decoding="async"
+                className="hero__photo"
+              />
+            </div>
+            <p className="hero__caption-name">לירן פרידמן</p>
+            <p className="hero__caption-handle">
+              <a
+                href="https://www.instagram.com/fritzzzz_ai/"
+                target="_blank"
+                rel="noopener"
+                aria-label="fritzzzz_ai באינסטגרם"
+              >
+                fritzzzz_ai
+              </a>
+            </p>
+          </div>
         </div>
       </div>
     </section>

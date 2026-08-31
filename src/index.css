@@ -101,6 +101,15 @@ button {
   background: var(--teal-dark);
 }
 
+.btn--orange {
+  background: var(--orange);
+  color: var(--white);
+}
+
+.btn--orange:hover {
+  background: var(--orange-dark);
+}
+
 .btn--outline {
   background: transparent;
   border-color: var(--line);

@@ -1,0 +1,1134 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>newspaper pages source</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=UnifrakturMaguntia&family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=Old+Standard+TT:ital,wght@0,400;0,700;1,400&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --ink: #26201a;
+        --ink-soft: #55483c;
+        --red: #a83a2a;
+        --paper-hi: #f9f4e8;
+        --paper: #f3ecda;
+        --paper-lo: #e7dcc2;
+      }
+
+      * {
+        box-sizing: border-box;
+        margin: 0;
+      }
+
+      body {
+        background: #555;
+        font-family: 'Old Standard TT', Georgia, serif;
+        color: var(--ink);
+      }
+
+      .sheet {
+        position: relative;
+        width: 1160px;
+        height: 1800px;
+        margin: 20px auto;
+        padding: 56px 60px 44px;
+        background:
+          radial-gradient(ellipse 130% 100% at 50% 38%, rgba(255, 253, 246, 0.55), transparent 72%),
+          radial-gradient(ellipse 42% 30% at 88% 96%, rgba(140, 116, 72, 0.09), transparent 75%),
+          radial-gradient(ellipse 32% 24% at 10% 90%, rgba(140, 116, 72, 0.07), transparent 75%),
+          linear-gradient(160deg, var(--paper-hi) 0%, var(--paper) 48%, var(--paper-lo) 100%);
+        display: flex;
+        flex-direction: column;
+        overflow: hidden;
+      }
+
+      .sheet::before {
+        content: '';
+        position: absolute;
+        inset: 0;
+        pointer-events: none;
+        z-index: 5;
+        background:
+          linear-gradient(
+            to bottom,
+            transparent 49.4%,
+            rgba(110, 92, 60, 0.1) 49.9%,
+            rgba(255, 253, 244, 0.35) 50.25%,
+            transparent 50.9%
+          ),
+          radial-gradient(ellipse 120% 120% at 50% 50%, transparent 64%, rgba(110, 90, 52, 0.16) 100%);
+      }
+
+      .sheet::after {
+        content: '';
+        position: absolute;
+        inset: 0;
+        pointer-events: none;
+        z-index: 6;
+        opacity: 0.3;
+        mix-blend-mode: multiply;
+        background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="240" height="240"><filter id="n"><feTurbulence type="fractalNoise" baseFrequency="0.85" numOctaves="3" seed="7"/><feColorMatrix type="matrix" values="0 0 0 0 0.62 0 0 0 0 0.55 0 0 0 0 0.4 0 0 0 0.55 0"/></filter><rect width="240" height="240" filter="url(%23n)"/></svg>');
+      }
+
+      /* ————— newspaper furniture ————— */
+
+      .hairline {
+        border: 0;
+        border-top: 1.5px solid var(--ink);
+      }
+
+      .rule-double {
+        border: 0;
+        border-top: 3.5px solid var(--ink);
+        position: relative;
+        margin-bottom: 1.5px;
+      }
+
+      .rule-double::after {
+        content: '';
+        position: absolute;
+        left: 0;
+        right: 0;
+        top: 4.5px;
+        border-top: 1.5px solid var(--ink);
+      }
+
+      .smallcaps {
+        font-variant: small-caps;
+        letter-spacing: 0.14em;
+      }
+
+      .kicker {
+        font-size: 15px;
+        font-weight: 700;
+        letter-spacing: 0.22em;
+        text-transform: uppercase;
+        color: var(--red);
+      }
+
+      /* ————— front page ————— */
+
+      .ears {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-end;
+        font-size: 15px;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        padding-bottom: 6px;
+      }
+
+      .masthead {
+        font-family: 'UnifrakturMaguntia', 'Playfair Display', serif;
+        font-size: 102px;
+        text-align: center;
+        line-height: 1;
+        padding: 10px 0 6px;
+      }
+
+      .dateline {
+        display: flex;
+        justify-content: space-between;
+        font-size: 15.5px;
+        letter-spacing: 0.06em;
+        text-transform: uppercase;
+        padding: 7px 2px;
+        border-top: 1.5px solid var(--ink);
+        border-bottom: 1.5px solid var(--ink);
+        margin-bottom: 10px;
+      }
+
+      .banner {
+        font-family: 'Playfair Display', serif;
+        font-weight: 900;
+        font-size: 74px;
+        line-height: 1.04;
+        text-align: center;
+        letter-spacing: 0.005em;
+        padding: 18px 30px 8px;
+      }
+
+      .banner-deck {
+        font-family: 'Playfair Display', serif;
+        font-style: italic;
+        font-weight: 400;
+        font-size: 28px;
+        text-align: center;
+        padding: 2px 0 14px;
+      }
+
+      .running-head {
+        display: flex;
+        justify-content: space-between;
+        align-items: baseline;
+        font-size: 15px;
+        letter-spacing: 0.14em;
+        text-transform: uppercase;
+        padding-bottom: 6px;
+      }
+
+      .running-head .rh-title {
+        font-family: 'UnifrakturMaguntia', serif;
+        font-size: 30px;
+        letter-spacing: 0;
+        text-transform: none;
+      }
+
+      .headline {
+        font-family: 'Playfair Display', serif;
+        font-weight: 900;
+        font-size: 74px;
+        line-height: 1.05;
+        padding: 22px 0 6px;
+      }
+
+      .headline .red {
+        color: var(--red);
+      }
+
+      .deck {
+        font-family: 'Playfair Display', serif;
+        font-style: italic;
+        font-size: 27px;
+        padding-bottom: 16px;
+      }
+
+      .body,
+      .story p {
+        font-size: 18px;
+        line-height: 1.5;
+        text-align: justify;
+      }
+
+      .story p + p {
+        text-indent: 1.6em;
+      }
+
+      .dropcap::first-letter {
+        font-family: 'Playfair Display', serif;
+        font-weight: 900;
+        font-size: 64px;
+        line-height: 0.82;
+        float: left;
+        padding: 6px 10px 0 0;
+        color: var(--red);
+      }
+
+      .cols-2 {
+        columns: 2;
+        column-gap: 30px;
+        column-rule: 1px solid rgba(41, 33, 21, 0.4);
+      }
+
+      .cols-3 {
+        columns: 3;
+        column-gap: 30px;
+        column-rule: 1px solid rgba(41, 33, 21, 0.4);
+      }
+
+      .sec-label {
+        font-size: 18px;
+        font-weight: 700;
+        letter-spacing: 0.2em;
+        text-transform: uppercase;
+        text-align: center;
+        padding: 8px 0 6px;
+      }
+
+      .item {
+        break-inside: avoid;
+        padding-bottom: 10px;
+      }
+
+      .item h4 {
+        font-family: 'Playfair Display', serif;
+        font-weight: 700;
+        font-size: 20px;
+        padding-bottom: 2px;
+      }
+
+      .item .when {
+        font-size: 13.5px;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        color: var(--ink-soft);
+      }
+
+      .pull {
+        border-top: 3.5px solid var(--ink);
+        border-bottom: 1.5px solid var(--ink);
+        padding: 22px 26px;
+        font-family: 'Playfair Display', serif;
+        font-style: italic;
+        font-size: 34px;
+        line-height: 1.3;
+        text-align: center;
+        margin: 20px 0;
+      }
+
+      .stats {
+        display: flex;
+        border: 2.5px solid var(--ink);
+        margin: 18px 0;
+      }
+
+      .stats > div {
+        flex: 1;
+        text-align: center;
+        padding: 20px 8px 16px;
+      }
+
+      .stats > div + div {
+        border-left: 1.5px solid var(--ink);
+      }
+
+      .stats .num {
+        font-family: 'Playfair Display', serif;
+        font-weight: 900;
+        font-size: 58px;
+        line-height: 1;
+      }
+
+      .stats .lbl {
+        font-size: 13px;
+        letter-spacing: 0.16em;
+        text-transform: uppercase;
+        padding-top: 5px;
+      }
+
+      .boxed {
+        border: 1.5px solid var(--ink);
+        padding: 12px 18px 8px;
+        break-inside: avoid;
+      }
+
+      .boxed .sec-label {
+        padding-top: 0;
+      }
+
+      .folio {
+        margin-top: auto;
+        border-top: 1.5px solid var(--ink);
+        padding-top: 8px;
+        display: flex;
+        justify-content: space-between;
+        font-size: 14px;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+      }
+
+      .photo {
+        break-inside: avoid;
+      }
+
+      .photo img {
+        width: 100%;
+        display: block;
+        filter: contrast(1.04) saturate(0.96);
+        border: 1.5px solid var(--ink);
+      }
+
+      .photo figcaption {
+        font-size: 13.5px;
+        font-style: italic;
+        text-align: center;
+        padding-top: 5px;
+      }
+
+      /* front page arrangement */
+      .fp-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr 340px;
+        gap: 0 30px;
+        padding-top: 4px;
+      }
+
+      .fp-lead {
+        grid-column: 1 / 3;
+      }
+
+      .fp-side {
+        border-left: 1px solid rgba(41, 33, 21, 0.4);
+        padding-left: 26px;
+      }
+
+      .fp-side .sec-label {
+        text-align: left;
+        padding-top: 14px;
+      }
+
+      .side-item {
+        padding-bottom: 9px;
+        font-size: 16.5px;
+        line-height: 1.4;
+      }
+
+      .side-item b {
+        display: block;
+        font-size: 18px;
+      }
+
+      .side-item .when {
+        font-size: 12.5px;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        color: var(--ink-soft);
+      }
+
+      .twin {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 0 30px;
+        padding-top: 14px;
+      }
+
+      .list-item {
+        padding-bottom: 9px;
+        font-size: 16.5px;
+        line-height: 1.42;
+      }
+
+      .list-item b {
+        color: var(--red);
+      }
+
+      .arc {
+        display: flex;
+        border-top: 3.5px solid var(--ink);
+        padding-top: 12px;
+        margin-top: 16px;
+      }
+
+      .arc > div {
+        flex: 1;
+        padding-right: 18px;
+      }
+
+      .arc .year {
+        font-family: 'Playfair Display', serif;
+        font-weight: 900;
+        font-size: 30px;
+      }
+
+      .arc .what {
+        font-size: 14px;
+        letter-spacing: 0.16em;
+        text-transform: uppercase;
+        color: var(--red);
+        padding-bottom: 3px;
+      }
+
+      .arc p {
+        font-size: 15px;
+        line-height: 1.38;
+      }
+
+      .motto {
+        font-family: 'Playfair Display', serif;
+        font-style: italic;
+        text-align: center;
+        font-size: 21px;
+        padding: 8px 0 6px;
+      }
+
+      .courses {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 30px 34px;
+        padding-top: 12px;
+      }
+
+      .course {
+        display: flex;
+        gap: 16px;
+      }
+
+      .course .no {
+        font-family: 'Playfair Display', serif;
+        font-weight: 900;
+        font-size: 50px;
+        line-height: 0.9;
+        color: var(--red);
+      }
+
+      .course h4 {
+        font-family: 'Playfair Display', serif;
+        font-size: 24px;
+        padding-bottom: 2px;
+      }
+
+      .course .sub {
+        font-size: 12.5px;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        color: var(--ink-soft);
+        padding-bottom: 5px;
+      }
+
+      .course p {
+        font-size: 17px;
+        line-height: 1.48;
+      }
+
+      .caps-strip {
+        border: 1.5px solid var(--ink);
+        margin-top: auto;
+        padding: 16px 20px;
+        font-size: 17px;
+        line-height: 1.5;
+      }
+
+      .caps-strip b {
+        letter-spacing: 0.16em;
+        text-transform: uppercase;
+        font-size: 14px;
+        color: var(--red);
+      }
+
+      .svc-grid {
+        display: grid;
+        grid-template-columns: 1fr 300px;
+        gap: 0 30px;
+      }
+
+      .svc-file {
+        border: 2.5px solid var(--ink);
+        padding: 16px 20px;
+        text-align: center;
+        height: fit-content;
+      }
+
+      .svc-file .big {
+        font-family: 'Playfair Display', serif;
+        font-weight: 900;
+        font-size: 52px;
+        line-height: 1.05;
+      }
+
+      .svc-file .lbl {
+        font-size: 13px;
+        letter-spacing: 0.16em;
+        text-transform: uppercase;
+        padding: 3px 0 10px;
+      }
+
+      .story3 {
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr;
+        gap: 0 30px;
+        padding-top: 10px;
+      }
+
+      .story3 > div + div {
+        border-left: 1px solid rgba(41, 33, 21, 0.4);
+        padding-left: 26px;
+        margin-left: -26px;
+      }
+
+      .story3 h3 {
+        font-family: 'Playfair Display', serif;
+        font-weight: 700;
+        font-size: 30px;
+        padding-bottom: 2px;
+      }
+
+      .story3 .when {
+        font-size: 13px;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        color: var(--ink-soft);
+        padding-bottom: 8px;
+      }
+
+      .story3 p,
+      .story3 li {
+        font-size: 17px;
+        line-height: 1.5;
+      }
+
+      .story3 ul {
+        padding-left: 18px;
+        padding-top: 6px;
+      }
+
+      .story3 li {
+        padding-bottom: 5px;
+      }
+
+      .edition-index {
+        border-top: 3.5px solid var(--ink);
+        margin-top: auto;
+        padding-top: 4px;
+      }
+
+      .idx {
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr;
+        gap: 0 30px;
+        padding-top: 6px;
+      }
+
+      .idx > div + div {
+        border-left: 1px solid rgba(41, 33, 21, 0.4);
+        padding-left: 26px;
+        margin-left: -26px;
+      }
+
+      .idx p {
+        font-size: 15.5px;
+        line-height: 1.4;
+        padding-top: 2px;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- ————————————————— PAGE 1 · FRONT PAGE ————————————————— -->
+    <section class="sheet" id="p1">
+      <div class="ears">
+        <span>AI Coach · AI Builder</span>
+        <span>Tel Aviv · Israel</span>
+      </div>
+      <div class="rule-double"></div>
+      <h1 class="masthead">The Friedman Record</h1>
+      <div class="dateline">
+        <span>Tuesday, September 1, 2026</span>
+        <span class="kicker">Background Edition</span>
+        <span>Liran Friedman</span>
+      </div>
+
+      <h2 class="banner">"Nobody has ten years of experience in this."</h2>
+      <p class="banner-deck">— I have twenty years of starting from zero.</p>
+      <div class="rule-double"></div>
+
+      <div class="fp-grid">
+        <div class="fp-lead">
+          <p class="sec-label">The lead</p>
+          <hr class="hairline" />
+          <div class="story cols-2" style="padding-top: 12px">
+            <p class="dropcap">
+              I <b>build</b> the AI systems companies are trying to figure out — and
+              <b>train</b> the people who have to run them. I am also an experienced
+              <b>software engineer</b> — five years shipping production code. I have
+              been doing both since the beginning — there was no playbook, so
+              <b style="color: var(--red)">I wrote one.</b>
+            </p>
+            <p>
+              Five years, shipped: as <i>sole engineer</i> — Probuild, a React Native
+              offline-first field app in production with paying clients, 2024 to
+              present. <i>Leading the team</i> — Funzy, backend and admin, the
+              production pilot used by 8,000+ users, 2025–2026. <i>Building native
+              bridges</i> — HyGear, fitness-device integration over BLE across native
+              mobile platforms, 2022–2023.
+            </p>
+          </div>
+
+          <div class="twin">
+            <div class="boxed">
+              <p class="sec-label">What I Build</p>
+              <hr class="hairline" style="margin-bottom: 10px" />
+              <p class="list-item"><b>Expert agents</b> — always-on specialists that know the business</p>
+              <p class="list-item"><b>Scheduled agents</b> — recurring reports, system access, computer use</p>
+              <p class="list-item"><b>Communication agents</b> — 24/7 on WhatsApp, Gmail, Slack and Telegram</p>
+              <p class="list-item"><b>AI work infrastructure</b> — instruction files, knowledge bases and procedures</p>
+              <p class="list-item"><b>Custom software</b> — applications and dedicated solutions when that is the answer</p>
+            </div>
+            <div class="boxed">
+              <p class="sec-label">What I Teach</p>
+              <hr class="hairline" style="margin-bottom: 10px" />
+              <p class="list-item"><b>Company-wide AI adoption</b> — how a whole organisation works with AI</p>
+              <p class="list-item"><b>Continuous training</b> — from the owner down to every employee</p>
+              <p class="list-item"><b>One-to-one coaching</b> — for owners and nontechnical professionals</p>
+              <p class="list-item"><b>Context management</b> — knowledge bases, conversations and clean handoffs</p>
+              <p class="list-item"><b>"AI Basics"</b> — a ten-part course in English and Hebrew</p>
+            </div>
+          </div>
+        </div>
+
+        <aside class="fp-side">
+          <figure class="photo">
+            <img src="../public/portrait-800.webp" alt="" />
+            <figcaption>Liran Friedman, AI coach &amp; builder, Tel Aviv.</figcaption>
+          </figure>
+
+          <p class="sec-label">Roles</p>
+          <hr class="hairline" style="margin-bottom: 8px" />
+          <div class="side-item">
+            <b>fritzzzz_ai</b> Founder — AI coaching, diagnosis &amp; build
+            <span class="when">2026 – present</span>
+          </div>
+          <div class="side-item">
+            <b>Codelovers</b> <span style="color: var(--red)">AI Lead</span> &amp; Senior Software Engineer
+            <span class="when">2022 – present</span>
+          </div>
+          <div class="side-item">
+            <b>NanoClaw</b> Launch Engineer
+            <span class="when">2026</span>
+          </div>
+
+          <p class="sec-label">Background</p>
+          <hr class="hairline" style="margin-bottom: 8px" />
+          <div class="side-item">
+            <b>Israel Air Force</b> Combat Officer, Air Defense
+            <span class="when">2004 – 2008</span>
+          </div>
+          <div class="side-item">
+            <b>Shenkar College</b> Certified Audio Engineer &amp; Designer
+            <span class="when">2014 – 2015</span>
+          </div>
+          <div class="side-item">
+            <b>High-Q</b> Psychometric-test teacher
+            <span class="when">2011 – 2014</span>
+          </div>
+          <div class="side-item" style="padding-top: 4px">
+            Psychometric <b style="display: inline; color: var(--red)">766</b> ·
+            Matriculation <b style="display: inline; color: var(--red)">109</b>
+          </div>
+        </aside>
+      </div>
+
+      <div class="edition-index">
+        <p class="sec-label">In This Edition</p>
+        <div class="idx">
+          <div>
+            <span class="kicker">Page 2</span>
+            <p><b>Before the code, there was command.</b> Military / command / instruction.</p>
+          </div>
+          <div>
+            <span class="kicker">Page 3</span>
+            <p><b>Teaching was already the job.</b> Teaching / operations / education.</p>
+          </div>
+          <div>
+            <span class="kicker">Page 4</span>
+            <p><b>Music made, managed &amp; released.</b> Audio / music / artist development.</p>
+          </div>
+        </div>
+      </div>
+
+      <div style="margin-top: auto">
+        <p class="sec-label">The Arc — Twenty Years, Five Trades</p>
+        <div class="arc">
+          <div>
+            <p class="what">Command</p>
+            <p class="year">2004</p>
+            <p>Led an air-defence unit from age twenty-one.</p>
+          </div>
+          <div>
+            <p class="what">Kitchen</p>
+            <p class="year">2013</p>
+            <p>Ran a Tel Aviv kitchen for three years.</p>
+          </div>
+          <div>
+            <p class="what">Studio</p>
+            <p class="year">2016</p>
+            <p>Built a studio and record label from scratch.</p>
+          </div>
+          <div>
+            <p class="what">Code</p>
+            <p class="year">2021</p>
+            <p>Self-taught in six months. Five years shipped.</p>
+          </div>
+          <div>
+            <p class="what">AI</p>
+            <p class="year">2026</p>
+            <p>Now building systems and teaching others to use them.</p>
+          </div>
+        </div>
+        <p class="motto">Every one of those was learned from zero, self-taught.</p>
+        <div class="folio">
+          <span>friedmanliran@gmail.com · github.com/fritzzzz1</span>
+          <span>Page 1</span>
+          <span>+972 54-351-7191 · Tel Aviv</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- ————————————————— PAGE 2 · MILITARY ————————————————— -->
+    <section class="sheet" id="p2">
+      <div class="running-head">
+        <span>Military / Command / Instruction</span>
+        <span class="rh-title">The Friedman Record</span>
+        <span>Background Edition · Page 2</span>
+      </div>
+      <div class="rule-double"></div>
+
+      <h2 class="headline">Before the code,<br /><span class="red">there was command.</span></h2>
+      <div class="svc-grid" style="padding-top: 10px">
+        <div>
+          <p class="body" style="font-size: 18px; padding-bottom: 14px">
+            Four years of active service in Israel Air Force Air Defense, followed by
+            nearly 15 years of reserve responsibility. Led personnel, implemented
+            operational directives, trained teams and built instructional systems
+            around complex technical work.
+          </p>
+          <p class="sec-label" style="text-align: left">Operational &amp; Reserve Service</p>
+          <hr class="hairline" style="margin-bottom: 10px" />
+          <div class="story cols-2">
+            <p>
+              July–December 2004: flight-course cadet in the Israel Air Force. Early
+              2005: transferred to the Air Defense array and trained on the Patriot
+              system. Completed commanders' training, IDF officer training at Bahad 1
+              and the Air Defense branch-specific officer completion at BISNAM.
+            </p>
+            <p>
+              Led personnel in a high-accountability technical environment:
+              implemented operational directives, converted them into working
+              procedures, instructed and qualified personnel, and built training
+              frameworks. In reserves, served with the Megiddo Unit and held
+              responsibility for reserve personnel for nearly 15 years. The unit
+              supports joint readiness and operational liaison with U.S. forces.
+            </p>
+          </div>
+        </div>
+        <div class="svc-file">
+          <p class="lbl" style="padding-bottom: 2px; color: var(--red)">Service File</p>
+          <p class="big">2004–08</p>
+          <p class="lbl">Active Service</p>
+          <p class="big">~15 yrs</p>
+          <p class="lbl">Reserve Responsibility</p>
+          <hr class="hairline" style="margin: 6px 0 10px" />
+          <p class="lbl" style="padding: 0">Patriot Officer · Lieutenant</p>
+        </div>
+      </div>
+
+      <div class="pull" style="margin-top: auto">
+        "I led people, trained them, and built the systems that made the team ready."
+      </div>
+
+      <div style="margin-top: auto">
+      <p class="sec-label">Specialized Military Courses</p>
+      <hr class="hairline" />
+      <div class="courses">
+        <div class="course">
+          <span class="no">01</span>
+          <div>
+            <h4>Hadarat</h4>
+            <p class="sub">Instruction &amp; delivery techniques / repeated across three stages</p>
+            <p>
+              Completed during commanders' training, at Bahad 1 and during the Air
+              Defense branch completion. Applied methods for structuring lessons,
+              delivering operational material clearly, maintaining attention and
+              verifying understanding.
+            </p>
+          </div>
+        </div>
+        <div class="course">
+          <span class="no">02</span>
+          <div>
+            <h4>Effective Learning</h4>
+            <p class="sub">Bahad 1 / officer training</p>
+            <p>
+              Methods for mastering dense professional material, organizing
+              information for retention, and teaching it accurately under the demands
+              of officer training.
+            </p>
+          </div>
+        </div>
+        <div class="course">
+          <span class="no">03</span>
+          <div>
+            <h4>Instructor Qualification</h4>
+            <p class="sub">BISNAM / software-conversion project</p>
+            <p>
+              Qualified to instruct personnel during an internal software conversion.
+              Translated system instructions into lesson structures, supported user
+              adoption, and organized repeatable knowledge transfer across the unit.
+            </p>
+          </div>
+        </div>
+        <div class="course">
+          <span class="no">04</span>
+          <div>
+            <h4>Manof</h4>
+            <p class="sub">IAF command &amp; leadership school</p>
+            <p>
+              Selective IAF leadership-development program focused on conscious
+              leadership: recognizing automatic command patterns, aligning behavior
+              with vision and strengths, and developing more deliberate leadership
+              judgment.
+            </p>
+          </div>
+        </div>
+      </div>
+      </div>
+
+      <div class="caps-strip">
+        <b>Leadership capabilities</b> — people leadership / operational instruction /
+        train-the-trainer / knowledge transfer / change adoption / reserve personnel
+        responsibility / command judgment
+      </div>
+
+      <div class="folio">
+        <span>Liran Friedman — Extended CV / Military &amp; Leadership</span>
+        <span>Page 2</span>
+        <span>friedmanliran@gmail.com</span>
+      </div>
+    </section>
+
+    <!-- ————————————————— PAGE 3 · TEACHING ————————————————— -->
+    <section class="sheet" id="p3">
+      <div class="running-head">
+        <span>Teaching / Operations / Education</span>
+        <span class="rh-title">The Friedman Record</span>
+        <span>Background Edition · Page 3</span>
+      </div>
+      <div class="rule-double"></div>
+
+      <h2 class="headline">Teaching was already the job.</h2>
+      <p class="deck red" style="color: var(--red)">AI only changed the subject.</p>
+      <p class="body" style="font-size: 18px; padding-bottom: 16px">
+        Experience in public instruction, employee onboarding, curriculum development,
+        logistics and live operations — with direct responsibility for helping people
+        perform reliably inside demanding systems.
+      </p>
+      <hr class="hairline" />
+
+      <div class="story3">
+        <div>
+          <p class="kicker" style="padding-bottom: 3px">Apple / People</p>
+          <h3>iDigital</h3>
+          <p class="when">March 2009 – July 2011</p>
+          <p>
+            Sales, public product training, employee onboarding and branch operations
+            for Apple's Israeli distributor.
+          </p>
+          <ul>
+            <li>Helped form the founding team of the Dizengoff Center store.</li>
+            <li>Delivered public training on Apple products and how to use them.</li>
+            <li>Owned onboarding and training for new store employees.</li>
+            <li>Logistics manager, November 2010 – July 2011.</li>
+          </ul>
+        </div>
+        <div>
+          <p class="kicker" style="padding-bottom: 3px">Teaching / Content</p>
+          <h3>High-Q</h3>
+          <p class="when">July 2011 – February 2014</p>
+          <p>
+            Psychometric-test instructor and contributor to the instructional product
+            itself.
+          </p>
+          <ul>
+            <li>Teacher training completed July 2011; first full course delivered for the December examination period.</li>
+            <li>Helped build the written-composition workshop.</li>
+            <li>Taught the advanced Psychometric 750 course twice in Tel Aviv.</li>
+            <li>Wrote quantitative-reasoning and logic questions for simulations and course books.</li>
+          </ul>
+        </div>
+        <div>
+          <p class="kicker" style="padding-bottom: 3px">Live Operations</p>
+          <h3>Eyal Shani kitchens</h3>
+          <p class="when">March 2015 – March 2021</p>
+          <p>
+            Six years in high-volume Tel Aviv kitchens, progressing from live service
+            to operational leadership and dedicated training.
+          </p>
+          <ul>
+            <li>Miznon Ibn Gabirol, 2015–2017. North Abraxas, 2017–2021.</li>
+            <li>As checker, led evening service — coordinating stations, order flow, timing and quality under pressure.</li>
+            <li>For the final two years at North Abraxas, returned twice weekly solely to train incoming cooks on ingredients and kitchen processes.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="stats">
+        <div>
+          <p class="num">766</p>
+          <p class="lbl">Psychometric</p>
+        </div>
+        <div>
+          <p class="num">109</p>
+          <p class="lbl">Matriculation Avg.</p>
+        </div>
+        <div>
+          <p class="num">4 × 5</p>
+          <p class="lbl">English / Math / Physics / Music</p>
+        </div>
+      </div>
+
+      <div style="margin-top: auto">
+      <p class="sec-label">Education</p>
+      <hr class="hairline" />
+      <div class="twin" style="padding-top: 10px">
+        <div>
+          <h3 style="font-family: 'Playfair Display', serif; font-size: 26px">Galili High School</h3>
+          <p class="when" style="font-size: 13px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--ink-soft); padding: 2px 0 6px">
+            Kfar Saba / 2001–2004
+          </p>
+          <p class="body">
+            Physics and music majors with a full matriculation certificate. Five-unit
+            study in native-speaker English, mathematics, physics and music —
+            analytical and creative systems learned side by side.
+          </p>
+        </div>
+        <div>
+          <h3 style="font-family: 'Playfair Display', serif; font-size: 26px">Shenkar / Pluto Studios</h3>
+          <p class="when" style="font-size: 13px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--ink-soft); padding: 2px 0 6px">
+            Tel Aviv / October 2012 – July 2014
+          </p>
+          <p class="body">
+            Professional Certificate in Sound Engineering through Shenkar External
+            Studies at Pluto Studios: electricity, electronics, acoustics, signal
+            flow, microphones, loudspeakers, consoles, live sound, recording,
+            editing, synthesis, production, mixing and mastering.
+          </p>
+        </div>
+      </div>
+      </div>
+
+      <div class="pull" style="margin-top: auto">
+        "Different industries, same recurring role: learn the system, hold the
+        standard, lead the team, and help other people perform inside it."
+      </div>
+
+      <div class="folio">
+        <span>Liran Friedman — Extended CV / Teaching &amp; Operations</span>
+        <span>Page 3</span>
+        <span>friedmanliran@gmail.com</span>
+      </div>
+    </section>
+
+    <!-- ————————————————— PAGE 4 · MUSIC ————————————————— -->
+    <section class="sheet" id="p4">
+      <div class="running-head">
+        <span>Audio / Music / Artist Development</span>
+        <span class="rh-title">The Friedman Record</span>
+        <span>Background Edition · Page 4</span>
+      </div>
+      <div class="rule-double"></div>
+
+      <h2 class="headline">Music made, managed<br /><span class="red">&amp; released.</span></h2>
+      <p class="body" style="font-size: 18px; padding: 8px 0 16px">
+        Certified audio engineer, studio manager, musician and label founder — with
+        experience recording albums, developing artists, publishing original music
+        and running creative operations.
+      </p>
+
+      <p class="sec-label">Professional Education &amp; Credentials</p>
+      <hr class="hairline" />
+      <div class="twin" style="padding-top: 12px">
+        <div class="boxed">
+          <p class="kicker" style="padding-bottom: 4px">Audio Education</p>
+          <h4 style="font-family: 'Playfair Display', serif; font-size: 23px; padding-bottom: 2px">Shenkar / Pluto Studios</h4>
+          <p class="when" style="font-size: 12.5px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--ink-soft); padding-bottom: 6px">
+            Professional sound engineering certificate / 2012–2014
+          </p>
+          <p class="body" style="font-size: 15.5px">
+            Sound engineering: electricity, signal flow, acoustics, microphones,
+            consoles, live sound, recording, editing, synthesis, production, mixing
+            and mastering.
+          </p>
+        </div>
+        <div class="boxed">
+          <p class="kicker" style="padding-bottom: 4px">Music Education</p>
+          <h4 style="font-family: 'Playfair Display', serif; font-size: 23px; padding-bottom: 2px">Galili music program</h4>
+          <p class="when" style="font-size: 12.5px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--ink-soft); padding-bottom: 6px">
+            Five-unit music major / 2001–2004
+          </p>
+          <p class="body" style="font-size: 15.5px">
+            Formal music study alongside ensemble leadership. Guided student groups
+            and created musical arrangements as an ensemble instructor from 2002 to
+            2004.
+          </p>
+        </div>
+      </div>
+
+      <p class="sec-label" style="padding-top: 18px">Professional Roles &amp; Creative Work</p>
+      <hr class="hairline" />
+      <div class="story3">
+        <div>
+          <p class="kicker" style="padding-bottom: 3px">Studio &amp; Audio</p>
+          <h3>Pluto Studios</h3>
+          <p class="when">Assistant to Doron Plaskov / 2013–2015</p>
+          <p>Recorded artists and created sound design for applications, games and advertising.</p>
+          <h3 style="padding-top: 12px">Mishmash Studios</h3>
+          <p class="when">Studio manager / partner / 2015 onward</p>
+          <p>
+            Managed studio operations, multitrack recording and production; built two
+            recording rooms and recorded album projects.
+          </p>
+        </div>
+        <div>
+          <p class="kicker" style="padding-bottom: 3px">Artist &amp; Label Development</p>
+          <h3>Independent label founder</h3>
+          <p style="padding-top: 6px">
+            Created and operated an independent label; published original music and
+            managed releases from recording through completion.
+          </p>
+          <h3 style="padding-top: 12px">Artist development</h3>
+          <p style="padding-top: 6px">
+            Mentored an artist and contributed artistic consulting, arrangements,
+            vocal production, songwriting and composition in Hebrew and English.
+          </p>
+        </div>
+        <div>
+          <p class="kicker" style="padding-bottom: 3px">Performance &amp; Projects</p>
+          <h3>Finjan</h3>
+          <p class="when">Guitar / arranging / co-production</p>
+          <p>Guitarist, arranger and co-producer, 2006–2012; band manager, 2010–2012.</p>
+          <h3 style="padding-top: 12px">Yeled Al Hayareach</h3>
+          <p class="when">Keyboards / programming / 2011 onward</p>
+          <p>Keyboards, programming, arranging, vocal production and live performance.</p>
+          <h3 style="padding-top: 12px">fritzzzz</h3>
+          <p class="when">Solo hip-hop project</p>
+          <p>Wrote, produced and recorded the project independently.</p>
+        </div>
+      </div>
+
+      <div style="margin-top: auto">
+      <p class="sec-label" style="padding-top: 18px">Technical &amp; Performance Practice</p>
+      <hr class="hairline" />
+      <div class="twin" style="padding-top: 10px">
+        <p class="body">
+          Pro Tools, Logic and Cubase; analog and digital consoles; studio wiring,
+          outboard equipment, acoustics and signal-path troubleshooting.
+        </p>
+        <p class="body">
+          Guitar, keyboards, bass guitar, percussion and vocals. MainStage, Ableton
+          Live, Native Instruments, Arturia and Spectrasonics. Composition and sound
+          design for visual media.
+        </p>
+      </div>
+      </div>
+
+      <div class="pull" style="margin-top: auto">
+        "For years, I have helped people hear what they already know, decide where
+        they want to go, and use the right tools to get there."
+      </div>
+
+      <div class="twin" style="padding-bottom: 12px">
+        <p class="body"><b class="kicker" style="font-size: 13px">Languages</b> &nbsp; Hebrew — native / English — full professional proficiency</p>
+        <p class="body"><b class="kicker" style="font-size: 13px">Interests</b> &nbsp; Tennis / football / basketball / cinema / international relations</p>
+      </div>
+
+      <div class="folio">
+        <span>Liran Friedman — Extended CV / Audio &amp; Music</span>
+        <span>Page 4</span>
+        <span>friedmanliran@gmail.com · +972 54-351-7191</span>
+      </div>
+    </section>
+
+    <script>
+      const sheets = document.querySelectorAll('.sheet')
+      sheets.forEach((sheet, index) => {
+        let seed = 41 + index * 97
+        const rand = () => {
+          seed = (seed * 16807) % 2147483647
+          return seed / 2147483647
+        }
+        const W = 1160
+        const H = 1800
+        const step = 46
+        const jitter = () => 1.5 + rand() * 4.5 + (rand() > 0.93 ? 5 : 0)
+        const points = []
+        for (let x = 0; x <= W; x += step) points.push(`${x}px ${jitter()}px`)
+        for (let y = step; y <= H; y += step) points.push(`calc(100% - ${jitter()}px) ${y}px`)
+        for (let x = W - step; x >= 0; x -= step) points.push(`${x}px calc(100% - ${jitter()}px)`)
+        for (let y = H - step; y >= step; y -= step) points.push(`${jitter()}px ${y}px`)
+        sheet.style.clipPath = `polygon(${points.join(',')})`
+      })
+    </script>
+  </body>
+</html>

@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from 'react'
+import { useInView } from '../hooks/useInView'
 import './Lens.css'
 
 const PATHS = [
@@ -15,8 +16,13 @@ const BOX_MIN = -40
 const BOX_SIZE = 380
 const LABEL_GAP = 30
 
-function useDrift(stage: React.RefObject<HTMLDivElement | null>, labels: React.RefObject<(HTMLSpanElement | null)[]>) {
+function useDrift(
+  stage: React.RefObject<HTMLDivElement | null>,
+  labels: React.RefObject<(HTMLSpanElement | null)[]>,
+  enabled: boolean,
+) {
   useEffect(() => {
+    if (!enabled) return
     if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
       place(0)
       return
@@ -49,37 +55,46 @@ function useDrift(stage: React.RefObject<HTMLDivElement | null>, labels: React.R
         el.style.transform = `translate(${-50 + 50 * ux}%, ${-50 + 50 * uy}%)`
       })
     }
-  }, [stage, labels])
+  }, [stage, labels, enabled])
 }
 
-function usePathCycle(paused: boolean) {
+function usePathCycle(paused: boolean, enabled: boolean) {
   const [active, setActive] = useState(-1)
+  const beforeIntro = active === -1
   useEffect(() => {
-    if (paused) return
+    if (!enabled || paused) return
     if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return
     let timer = 0
     const start = window.setTimeout(() => {
       setActive(0)
       timer = window.setInterval(() => setActive((i) => (i + 1) % PATHS.length), CYCLE_MS)
-    }, active === -1 ? INTRO_MS : 0)
+    }, beforeIntro ? INTRO_MS : 0)
     return () => {
       window.clearTimeout(start)
       window.clearInterval(timer)
     }
-  }, [paused, active === -1])
+  }, [paused, enabled, beforeIntro])
   return [active, setActive] as const
 }
 
-export function Lens() {
+interface LensProps {
+  tone?: 'dark' | 'light'
+}
+
+export function Lens({ tone = 'dark' }: LensProps) {
+  const { ref, inView } = useInView<HTMLDivElement>(0.35)
   const [hovered, setHovered] = useState(-1)
-  const [cycled, setCycled] = usePathCycle(hovered !== -1)
+  const [cycled, setCycled] = usePathCycle(hovered !== -1, inView)
   const active = hovered !== -1 ? hovered : cycled
   const stage = useRef<HTMLDivElement>(null)
   const labels = useRef<(HTMLSpanElement | null)[]>([])
-  useDrift(stage, labels)
+  useDrift(stage, labels, inView)
 
   return (
-    <div className="lens">
+    <div
+      ref={ref}
+      className={`lens${tone === 'light' ? ' lens--on-light' : ''}${inView ? ' is-visible' : ''}`}
+    >
       <div className="lens__stage" ref={stage}>
         <svg
           className="lens__svg"

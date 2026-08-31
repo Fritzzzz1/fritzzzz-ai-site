@@ -10,7 +10,7 @@ export function Cta() {
         </p>
         <div className="cta__actions">
           <a
-            href="https://wa.me/972543517191"
+            href={`https://wa.me/972543517191?text=${encodeURIComponent('היי לירן, קראתי באתר ואשמח לשיחת היכרות 🙂')}`}
             target="_blank"
             rel="noopener"
             className="btn btn--primary"

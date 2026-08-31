@@ -3,6 +3,13 @@
   background: var(--soft-teal);
 }
 
+.method__head {
+  display: grid;
+  grid-template-columns: 1.1fr 0.9fr;
+  gap: clamp(32px, 5vw, 72px);
+  align-items: center;
+}
+
 .method__title {
   font-size: clamp(2rem, 4.5vw, 3.2rem);
   line-height: 1.15;
@@ -12,9 +19,18 @@
 .method__intro {
   margin-top: 20px;
   color: var(--muted);
-  max-width: 62ch;
+  max-width: 42ch;
   font-size: 1.0625rem;
   line-height: 1.7;
+}
+
+.method__visual {
+  display: flex;
+  justify-content: center;
+}
+
+.method__visual .lens {
+  width: min(400px, 100%);
 }
 
 .method__flow {
@@ -91,6 +107,18 @@
 }
 
 @media (max-width: 900px) {
+  .method__head {
+    grid-template-columns: 1fr;
+  }
+
+  .method__intro {
+    max-width: none;
+  }
+
+  .method__visual .lens {
+    width: min(280px, 100%);
+  }
+
   .method__flow {
     grid-template-columns: 1fr;
     gap: 32px;

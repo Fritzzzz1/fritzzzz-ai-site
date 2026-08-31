@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react'
 import { Lockup } from './Mark'
+import { NewspaperButton } from './Newspaper'
 import './Nav.css'
 
 const LINKS = [
@@ -31,6 +32,7 @@ export function Nav() {
             </a>
           ))}
         </nav>
+        <NewspaperButton />
         <a
           href="https://wa.me/972543517191"
           target="_blank"

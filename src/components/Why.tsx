@@ -10,36 +10,12 @@ export function Why() {
   return (
     <section id="why" className="why">
       <div className="container why__inner">
-        <div className="why__photo-block">
-          <div className="why__photo-frame">
-            <img
-              src={`${import.meta.env.BASE_URL}portrait-800.webp`}
-              srcSet={`${import.meta.env.BASE_URL}portrait-800.webp 800w, ${import.meta.env.BASE_URL}portrait-1600.webp 1600w`}
-              sizes="(max-width: 800px) 220px, 320px"
-              alt="לירן פרידמן"
-              width={800}
-              height={800}
-              loading="lazy"
-              decoding="async"
-              className="why__photo"
-            />
-          </div>
-          <p className="why__caption-name">לירן פרידמן</p>
-          <p className="why__caption-handle">
-            <a
-              href="https://www.instagram.com/fritzzzz_ai/"
-              target="_blank"
-              rel="noopener"
-              aria-label="fritzzzz_ai באינסטגרם"
-            >
-              fritzzzz_ai
-            </a>
-          </p>
-        </div>
-
-        <div className="why__copy">
+        <header className="why__lede">
           <p className="eyebrow">למה אני</p>
           <h2 className="why__title">קודם מבינים. אחר כך ממליצים.</h2>
+        </header>
+
+        <div className="why__copy">
           <p className="why__paragraph">
             אני לא מגיע עם פתרון מוכן. קודם אני לומד איך העסק שלכם עובד — האנשים, התהליכים, איפה
             הזמן הולך לאיבוד — ורק אז ממליץ, גם כשההמלצה היא לא לבנות כלום. הדרכות וכלים יש בשפע;

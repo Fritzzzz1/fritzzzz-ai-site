@@ -1,30 +1,28 @@
 import { useEffect, useRef, useState } from 'react'
 
-export function useInView<T extends HTMLElement>(
-  options: IntersectionObserverInit = { threshold: 0.2 },
-) {
+export function useInView<T extends HTMLElement>(threshold = 0.2) {
   const ref = useRef<T | null>(null)
-  const [inView, setInView] = useState(false)
+  const [inView, setInView] = useState(() =>
+    window.matchMedia('(prefers-reduced-motion: reduce)').matches,
+  )
 
   useEffect(() => {
     const node = ref.current
-    if (!node) return
+    if (!node || inView) return
 
-    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-      setInView(true)
-      return
-    }
-
-    const observer = new IntersectionObserver(([entry]) => {
-      if (entry.isIntersecting) {
-        setInView(true)
-        observer.disconnect()
-      }
-    }, options)
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setInView(true)
+          observer.disconnect()
+        }
+      },
+      { threshold },
+    )
 
     observer.observe(node)
     return () => observer.disconnect()
-  }, [])
+  }, [threshold, inView])
 
   return { ref, inView }
 }

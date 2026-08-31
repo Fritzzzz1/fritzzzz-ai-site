@@ -45,8 +45,21 @@
   font-size: 0.9375rem;
 }
 
+.nav__about {
+  font-size: 0.9375rem;
+}
+
 @media (max-width: 760px) {
   .nav__links {
     display: none;
+  }
+
+  .nav__inner {
+    gap: 12px;
+  }
+
+  .nav__about,
+  .nav__cta {
+    padding-inline: 16px;
   }
 }

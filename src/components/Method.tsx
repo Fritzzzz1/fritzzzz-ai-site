@@ -1,4 +1,5 @@
 import { useInView } from '../hooks/useInView'
+import { Lens } from './Lens'
 import './Method.css'
 
 const STEPS = [
@@ -30,18 +31,25 @@ const STEPS = [
 ]
 
 export function Method() {
-  const { ref, inView } = useInView<HTMLDivElement>({ threshold: 0.35 })
+  const { ref, inView } = useInView<HTMLDivElement>(0.35)
 
   return (
     <section id="method" className="method">
       <div className="container">
-        <p className="eyebrow">השיטה</p>
-        <h2 className="method__title">מאבחנים לפני שבונים.</h2>
-        <p className="method__intro">
-          מתחילים בשיחת היכרות: אתם מספרים על הכאבים של העסק, ואני מציע דרכים להתמודדות
-          ולשיפור. כבר מהמפגש הזה תצאו עם טיפים ראשונים, הבנה איך מתקדמים, ומגוון אפשרויות
-          להמשך.
-        </p>
+        <div className="method__head">
+          <div className="method__copy">
+            <p className="eyebrow">השיטה</p>
+            <h2 className="method__title">מאבחנים לפני שבונים.</h2>
+            <p className="method__intro">
+              מתחילים בשיחת היכרות: אתם מספרים על הכאבים של העסק, ואני מציע דרכים להתמודדות
+              ולשיפור. כבר מהמפגש הזה תצאו עם טיפים ראשונים, הבנה איך מתקדמים, ומגוון אפשרויות
+              להמשך.
+            </p>
+          </div>
+          <div className="method__visual">
+            <Lens tone="light" />
+          </div>
+        </div>
 
         <div ref={ref} className={`method__flow${inView ? ' in-view' : ''}`}>
           <div className="method__track">
