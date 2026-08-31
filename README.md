@@ -1,32 +1,32 @@
-# React + TypeScript + Vite
+# fritzzzz-ai-site
 
-This template provides a minimal setup to get React working in Vite with HMR and some Oxlint rules.
+The public site of fritzzzz_ai — Liran Friedman's AI coaching and building practice. Hebrew, RTL, single page: hero with a rotating image deck, problems, method, why, CTA — plus the newspaper.
 
-Currently, two official plugins are available:
+## The newspaper
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+The עליי button in the nav opens Liran's career told as a four-page broadsheet — *The Friedman Record* in English, *רשומות פרידמן* in Hebrew — in a full-screen flipbook over frosted glass:
 
-## React Compiler
+- 3D page flips with drag-to-turn, arrows, keyboard, and a page-rustle sound.
+- Two reading modes: **ZOOM** (map-style — wheel/pinch toward the cursor, click steps, drag pans, +/− buttons) and **LENS** (a magnifying glass that follows the cursor).
+- Language toggle; each edition has its own downloadable PDF.
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+The pages themselves are designed in `tools/newspaper.html` (eight sheets: `p1`–`p4` English, `p1he`–`p4he` Hebrew) and rendered to `public/newspaper/` as deckle-edged webp images plus the two PDFs:
 
-## Expanding the Oxlint configuration
-
-If you are developing a production application, we recommend enabling type-aware lint rules by installing `oxlint-tsgolint` and editing `.oxlintrc.json`:
-
-```json
-{
-  "$schema": "./node_modules/oxlint/configuration_schema.json",
-  "plugins": ["react", "typescript", "oxc"],
-  "options": {
-    "typeAware": true
-  },
-  "rules": {
-    "react/rules-of-hooks": "error",
-    "react/only-export-components": ["warn", { "allowConstantExport": true }]
-  }
-}
+```sh
+node tools/render-newspaper.mjs
 ```
 
-See the [Oxlint rules documentation](https://oxc.rs/docs/guide/usage/linter/rules) for the full list of rules and categories.
+Requires macOS with Google Chrome installed (`puppeteer-core` drives it; `sips` compresses the PDF pages).
+
+## Stack and commands
+
+React 18 + TypeScript + Vite. Deployed under `/fritzzzz-ai-site/` (see `base` in `vite.config.ts`).
+
+```sh
+npm run dev       # dev server
+npm run build     # type-check + production build to dist/
+npm run preview   # serve dist/
+npm run lint      # oxlint
+```
+
+`tools/og-image.html` is the source of `public/og.png`.

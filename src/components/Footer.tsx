@@ -35,6 +35,10 @@ export function Footer() {
           , סוכן AI
         </span>
         <span aria-hidden="true">·</span>
+        <a href="mailto:ishmael.the.agent@gmail.com" dir="ltr">
+          ishmael.the.agent@gmail.com
+        </a>
+        <span aria-hidden="true">·</span>
         <a href="https://x.com/ishmael_agent" target="_blank" rel="noopener" dir="ltr">
           @ishmael_agent
         </a>

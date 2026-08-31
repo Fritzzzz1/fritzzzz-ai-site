@@ -101,13 +101,14 @@ button {
   background: var(--teal-dark);
 }
 
-.btn--orange {
-  background: var(--orange);
-  color: var(--white);
+.btn--newsprint {
+  background: var(--newsprint);
+  color: var(--newsprint-ink);
+  border-color: var(--newsprint-dark);
 }
 
-.btn--orange:hover {
-  background: var(--orange-dark);
+.btn--newsprint:hover {
+  background: var(--newsprint-dark);
 }
 
 .btn--outline {

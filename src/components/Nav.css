@@ -10,9 +10,8 @@
 }
 
 .nav--scrolled {
-  background: rgba(244, 245, 246, 0.82);
+  background: rgba(244, 245, 246, 0.91);
   backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
 }
 
 .nav__inner {

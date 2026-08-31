@@ -1,6 +1,33 @@
+import { useEffect, useState } from 'react'
 import './Hero.css'
 
+const PHOTOS = [
+  `${import.meta.env.BASE_URL}portrait-800.webp`,
+  ...Array.from(
+    { length: 16 },
+    (_, i) =>
+      `${import.meta.env.BASE_URL}hero/gen-${String(i + 1).padStart(2, '0')}.jpg`,
+  ),
+]
+const ROTATE_MS = 7500
+
 export function Hero() {
+  const [photo, setPhoto] = useState(0)
+
+  useEffect(() => {
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return
+    const timer = window.setInterval(
+      () => setPhoto((current) => (current + 1) % PHOTOS.length),
+      ROTATE_MS,
+    )
+    return () => window.clearInterval(timer)
+  }, [])
+
+  useEffect(() => {
+    new Image().src = PHOTOS[(photo + 1) % PHOTOS.length]
+  }, [photo])
+
+  const previous = (photo + PHOTOS.length - 1) % PHOTOS.length
   return (
     <section className="hero">
       <div className="container hero__inner">
@@ -31,16 +58,26 @@ export function Hero() {
         <div className="hero__visual">
           <div className="hero__photo-block">
             <div className="hero__photo-frame">
+              {photo !== 0 && (
+                <img
+                  key={`under-${previous}`}
+                  src={PHOTOS[previous]}
+                  alt=""
+                  width={900}
+                  height={900}
+                  decoding="async"
+                  className="hero__photo hero__photo--under"
+                />
+              )}
               <img
-                src={`${import.meta.env.BASE_URL}portrait-800.webp`}
-                srcSet={`${import.meta.env.BASE_URL}portrait-800.webp 800w, ${import.meta.env.BASE_URL}portrait-1600.webp 1600w`}
-                sizes="(max-width: 900px) 240px, 400px"
-                alt="לירן פרידמן"
-                width={800}
-                height={800}
-                fetchPriority="high"
+                key={`over-${photo}`}
+                src={PHOTOS[photo]}
+                alt={photo === 0 ? 'לירן פרידמן' : 'עבודת AI של fritzzzz_ai'}
+                width={900}
+                height={900}
+                fetchPriority={photo === 0 ? 'high' : undefined}
                 decoding="async"
-                className="hero__photo"
+                className="hero__photo hero__photo--over"
               />
             </div>
             <p className="hero__caption-name">לירן פרידמן</p>

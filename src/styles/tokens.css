@@ -8,8 +8,9 @@
   --muted: #55666f;
   --line: #dde3e6;
   --light-teal: #58a49e;
-  --orange: #e8590c;
-  --orange-dark: #cf4e08;
+  --newsprint: #f3ecda;
+  --newsprint-dark: #e7dcc2;
+  --newsprint-ink: #26201a;
 
   --muted-on-dark: #a9b7bc;
 
@@ -19,9 +20,7 @@
   --content-width: 1120px;
   --section-padding: clamp(72px, 10vw, 128px);
 
-  --radius-sm: 8px;
   --radius-md: 10px;
   --radius-lg: 12px;
 
-  --shadow-hover: 0 12px 32px -12px rgba(22, 38, 46, 0.22);
 }
