@@ -2,7 +2,6 @@ import { useCallback, useEffect, useRef, useState } from 'react'
 import { createPortal } from 'react-dom'
 import { useIsSpread } from '../hooks/useIsSpread'
 import { useMapZoom } from '../hooks/useMapZoom'
-import { playPageRustle, playZoomTick } from './newspaperSounds'
 import './Newspaper.css'
 
 const PAGES = [1, 2, 3, 4].map(
@@ -54,7 +53,7 @@ function NewspaperModal({ onClose }: { onClose: () => void }) {
     onPointerDown: onZoomPointerDown,
     onPointerMove: onZoomPointerMove,
     onPointerUp: onZoomPointerUp,
-  } = useMapZoom(isSpread && mode === 'zoom', { onZoomToggle: playZoomTick })
+  } = useMapZoom(isSpread && mode === 'zoom')
   const bookRef = useRef<HTMLDivElement>(null)
   const leafEls = useRef<(HTMLDivElement | null)[]>([])
   const pageDrag = useRef({
@@ -155,7 +154,6 @@ function NewspaperModal({ onClose }: { onClose: () => void }) {
       setStep((current) => {
         const next = current + direction
         if (next < 0 || next > lastStep) return current
-        playPageRustle()
         if (isSpread) setFlippingLeaf(direction === 1 ? current : next)
         return next
       })
