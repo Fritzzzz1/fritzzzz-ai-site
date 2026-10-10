@@ -23,6 +23,10 @@ export function Footer() {
             className="footer__link"
           >
             אינסטגרם
+          </a>{' '}
+          ·{' '}
+          <a href={`${import.meta.env.BASE_URL}privacy.html`} className="footer__link">
+            מדיניות פרטיות
           </a>
         </p>
       </div>
