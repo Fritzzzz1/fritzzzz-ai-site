@@ -4,7 +4,7 @@ import './Hero.css'
 const PHOTOS = [
   `${import.meta.env.BASE_URL}portrait-800.webp`,
   ...Array.from(
-    { length: 15 },
+    { length: 8 },
     (_, i) =>
       `${import.meta.env.BASE_URL}hero/gen-${String(i + 1).padStart(2, '0')}.jpg`,
   ),
